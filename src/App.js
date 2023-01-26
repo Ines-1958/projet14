@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Modal from './components/Modal/Modal'
+import Dropdown from './components/Dropdown/Dropdown'
+import { useState } from 'react'
+import CreateEmployee from './pages/CreateEmployee/CreateEmployee'
+import EmployeeList from './pages/EmployeeList/EmployeeList'
+import { Table } from './components/Table/Table'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {/* <Modal /> */}
+      {/* <Dropdown selected={selected} setSelected={setSelected} /> */}
+
+      <Routes>
+        <Route path="/" element={<CreateEmployee />} />
+        <Route path="/employees" element={<EmployeeList />} />
+        <Route path="/modal" element={<Modal />} />
+        <Route path="/dropdown" element={<Dropdown />} />
+        <Route path="/table" element={<Table />} />
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App
