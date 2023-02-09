@@ -1,50 +1,9 @@
-.dropdown {
-  width: 400px;
-  // margin: 100px auto;
-  margin: 10px auto;
-  position: relative;
-  user-select: none;
+.css-b62m3t-container {
+  width: 15rem;
+}
 
-  .dropdown-btn {
-    // padding: 15px 20px;
-    // background: #fff;
-    // box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.6);
-    // font-weight: bold;
-    color: #454545;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    //
-    border: 1px solid #c5c5c5;
-    background: #f6f6f6;
-    border-radius: 3px;
-    padding: 8px 13px;
-
-    .ioMdArrowDropdown {
-      color: #797979;
-    }
-  }
-
-  .dropdown-content {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    padding: 10px;
-    background: #fff;
-    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.6);
-    font-weight: 500;
-    color: #333;
-    width: 95%;
-
-    .dropdown-item {
-      padding: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        background: #f4f4f4;
-      }
-    }
-  }
+.css-1nmdiq5-menu {
+  //   div {
+  //     background-color: yellow;
+  //   }
 }

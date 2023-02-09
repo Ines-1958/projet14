@@ -10,9 +10,28 @@
   justify-content: space-between;
 
   &-btn {
-    a {
-      text-decoration: none;
+    // a {
+    //   text-decoration: none;
+    // }
+    .button-paginate {
+      border: none;
+      background: none;
     }
+  }
+}
+
+table {
+  .sort-icon {
+    color: #7a80dd;
+  }
+
+  tr {
+    &:nth-child(even) {
+      background-color: #93ad18;
+    }
+    // &:nth-child(odd) {
+    //   background: #ddd;
+    // }
   }
 }
 
@@ -29,7 +48,7 @@ table th {
 }
 
 table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  // background-color: #f2f2f2;
 }
 
 table tr:hover {

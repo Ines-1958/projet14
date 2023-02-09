@@ -1,6 +1,26 @@
 .employees_page-container {
   display: flex;
   flex-direction: column;
+  margin: 0 6rem;
+
+  .search-select {
+    label {
+      select {
+        margin: 0 0.3rem;
+        padding: 0 0.2rem;
+      }
+    }
+  }
+
+  .pagination {
+    padding-top: 1rem;
+
+    .pagination-btn {
+      .next {
+        margin-left: 1rem;
+      }
+    }
+  }
 
   .back-home {
     align-self: center;

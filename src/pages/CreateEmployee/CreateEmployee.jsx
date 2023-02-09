@@ -1,257 +1,336 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './CreateEmployee.scss'
+import CustomDropdown from '../../components/CustomDropdown/CustomDropdown'
+import Datepicker from '../../components/Datepicker/Datepicker'
+import employeeReducer from '../../redux/reducers/employeeReducer'
 import Dropdown from '../../components/Dropdown/Dropdown'
 
 export default function CreateEmployee() {
   const [selectedStates, setSelectedStates] = useState('Alabama')
   const [selectedDepartement, setSelectedDepartement] = useState('Sales')
+  const [birthdate, setBirthdate] = useState(null)
+  const [startdate, setStartdate] = useState(null)
+  // const [state, setState] = useState('US')
+
+  //REDUX
+  const [employee, setEmployee] = useState({
+    first_name: '',
+    last_name: '',
+    start_date: '',
+    department: '',
+    date_of_birth: '',
+    street: '',
+    city: '',
+    // state: state.value,
+    state: '',
+    zip_code: '',
+  })
+
+  // const handleChangeState = (selectedOption) => {
+  //   setState(selectedOption)
+  // }
+
+  const dispatch = useDispatch()
+
+  const handleForm = (e) => {
+    e.preventDefault()
+
+    dispatch({
+      type: 'CREATEEMPLOYEE',
+      payload: employee,
+    })
+
+    setEmployee({
+      first_name: '',
+      last_name: '',
+      start_date: '',
+      date_of_birth: '',
+      street: '',
+      city: '',
+      zip_code: '',
+    })
+  }
+
+  const handleInputs = (e) => {
+    if (e.target.classList.contains('input-firstName')) {
+      const newObjState = { ...employee, first_name: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-lastName')) {
+      const newObjState = { ...employee, last_name: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-startDate')) {
+      const newObjState = { ...employee, start_date: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-street')) {
+      const newObjState = { ...employee, street: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-city')) {
+      const newObjState = { ...employee, city: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-zipCode')) {
+      const newObjState = { ...employee, zip_code: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-state')) {
+      const newObjState = { ...employee, state: e.target.value }
+      setEmployee(newObjState)
+    } else if (e.target.classList.contains('input-department')) {
+      const newObjState = { ...employee, department: e.target.value }
+      setEmployee(newObjState)
+    }
+  }
 
   const states = [
     {
-      name: 'Alabama',
-      abbreviation: 'AL',
+      label: 'Alabama',
+      value: 'AL',
     },
     {
-      name: 'Alaska',
-      abbreviation: 'AK',
+      label: 'Alaska',
+      value: 'AK',
     },
     {
-      name: 'American Samoa',
-      abbreviation: 'AS',
+      label: 'American Samoa',
+      value: 'AS',
     },
     {
-      name: 'Arizona',
-      abbreviation: 'AZ',
+      label: 'Arizona',
+      value: 'AZ',
     },
     {
-      name: 'Arkansas',
-      abbreviation: 'AR',
+      label: 'Arkansas',
+      value: 'AR',
     },
     {
-      name: 'California',
-      abbreviation: 'CA',
+      label: 'California',
+      value: 'CA',
     },
     {
-      name: 'Colorado',
-      abbreviation: 'CO',
+      label: 'Colorado',
+      value: 'CO',
     },
     {
-      name: 'Connecticut',
-      abbreviation: 'CT',
+      label: 'Connecticut',
+      value: 'CT',
     },
     {
-      name: 'Delaware',
-      abbreviation: 'DE',
+      label: 'Delaware',
+      value: 'DE',
     },
     {
-      name: 'District Of Columbia',
-      abbreviation: 'DC',
+      label: 'District Of Columbia',
+      value: 'DC',
     },
     {
-      name: 'Federated States Of Micronesia',
-      abbreviation: 'FM',
+      label: 'Federated States Of Micronesia',
+      value: 'FM',
     },
     {
-      name: 'Florida',
-      abbreviation: 'FL',
+      label: 'Florida',
+      value: 'FL',
     },
     {
-      name: 'Georgia',
-      abbreviation: 'GA',
+      label: 'Georgia',
+      value: 'GA',
     },
     {
-      name: 'Guam',
-      abbreviation: 'GU',
+      label: 'Guam',
+      value: 'GU',
     },
     {
-      name: 'Hawaii',
-      abbreviation: 'HI',
+      label: 'Hawaii',
+      value: 'HI',
     },
     {
-      name: 'Idaho',
-      abbreviation: 'ID',
+      label: 'Idaho',
+      value: 'ID',
     },
     {
-      name: 'Illinois',
-      abbreviation: 'IL',
+      label: 'Illinois',
+      value: 'IL',
     },
     {
-      name: 'Indiana',
-      abbreviation: 'IN',
+      label: 'Indiana',
+      value: 'IN',
     },
     {
-      name: 'Iowa',
-      abbreviation: 'IA',
+      label: 'Iowa',
+      value: 'IA',
     },
     {
-      name: 'Kansas',
-      abbreviation: 'KS',
+      label: 'Kansas',
+      value: 'KS',
     },
     {
-      name: 'Kentucky',
-      abbreviation: 'KY',
+      label: 'Kentucky',
+      value: 'KY',
     },
     {
-      name: 'Louisiana',
-      abbreviation: 'LA',
+      label: 'Louisiana',
+      value: 'LA',
     },
     {
-      name: 'Maine',
-      abbreviation: 'ME',
+      label: 'Maine',
+      value: 'ME',
     },
     {
-      name: 'Marshall Islands',
-      abbreviation: 'MH',
+      label: 'Marshall Islands',
+      value: 'MH',
     },
     {
-      name: 'Maryland',
-      abbreviation: 'MD',
+      label: 'Maryland',
+      value: 'MD',
     },
     {
-      name: 'Massachusetts',
-      abbreviation: 'MA',
+      label: 'Massachusetts',
+      value: 'MA',
     },
     {
-      name: 'Michigan',
-      abbreviation: 'MI',
+      label: 'Michigan',
+      value: 'MI',
     },
     {
-      name: 'Minnesota',
-      abbreviation: 'MN',
+      label: 'Minnesota',
+      value: 'MN',
     },
     {
-      name: 'Mississippi',
-      abbreviation: 'MS',
+      label: 'Mississippi',
+      value: 'MS',
     },
     {
-      name: 'Missouri',
-      abbreviation: 'MO',
+      label: 'Missouri',
+      value: 'MO',
     },
     {
-      name: 'Montana',
-      abbreviation: 'MT',
+      label: 'Montana',
+      value: 'MT',
     },
     {
-      name: 'Nebraska',
-      abbreviation: 'NE',
+      label: 'Nebraska',
+      value: 'NE',
     },
     {
-      name: 'Nevada',
-      abbreviation: 'NV',
+      label: 'Nevada',
+      value: 'NV',
     },
     {
-      name: 'New Hampshire',
-      abbreviation: 'NH',
+      label: 'New Hampshire',
+      value: 'NH',
     },
     {
-      name: 'New Jersey',
-      abbreviation: 'NJ',
+      label: 'New Jersey',
+      value: 'NJ',
     },
     {
-      name: 'New Mexico',
-      abbreviation: 'NM',
+      label: 'New Mexico',
+      value: 'NM',
     },
     {
-      name: 'New York',
-      abbreviation: 'NY',
+      label: 'New York',
+      value: 'NY',
     },
     {
-      name: 'North Carolina',
-      abbreviation: 'NC',
+      label: 'North Carolina',
+      value: 'NC',
     },
     {
-      name: 'North Dakota',
-      abbreviation: 'ND',
+      label: 'North Dakota',
+      value: 'ND',
     },
     {
-      name: 'Northern Mariana Islands',
-      abbreviation: 'MP',
+      label: 'Northern Mariana Islands',
+      value: 'MP',
     },
     {
-      name: 'Ohio',
-      abbreviation: 'OH',
+      label: 'Ohio',
+      value: 'OH',
     },
     {
-      name: 'Oklahoma',
-      abbreviation: 'OK',
+      label: 'Oklahoma',
+      value: 'OK',
     },
     {
-      name: 'Oregon',
-      abbreviation: 'OR',
+      label: 'Oregon',
+      value: 'OR',
     },
     {
-      name: 'Palau',
-      abbreviation: 'PW',
+      label: 'Palau',
+      value: 'PW',
     },
     {
-      name: 'Pennsylvania',
-      abbreviation: 'PA',
+      label: 'Pennsylvania',
+      value: 'PA',
     },
     {
-      name: 'Puerto Rico',
-      abbreviation: 'PR',
+      label: 'Puerto Rico',
+      value: 'PR',
     },
     {
-      name: 'Rhode Island',
-      abbreviation: 'RI',
+      label: 'Rhode Island',
+      value: 'RI',
     },
     {
-      name: 'South Carolina',
-      abbreviation: 'SC',
+      label: 'South Carolina',
+      value: 'SC',
     },
     {
-      name: 'South Dakota',
-      abbreviation: 'SD',
+      label: 'South Dakota',
+      value: 'SD',
     },
     {
-      name: 'Tennessee',
-      abbreviation: 'TN',
+      label: 'Tennessee',
+      value: 'TN',
     },
     {
-      name: 'Texas',
-      abbreviation: 'TX',
+      label: 'Texas',
+      value: 'TX',
     },
     {
-      name: 'Utah',
-      abbreviation: 'UT',
+      label: 'Utah',
+      value: 'UT',
     },
     {
-      name: 'Vermont',
-      abbreviation: 'VT',
+      label: 'Vermont',
+      value: 'VT',
     },
     {
-      name: 'Virgin Islands',
-      abbreviation: 'VI',
+      label: 'Virgin Islands',
+      value: 'VI',
     },
     {
-      name: 'Virginia',
-      abbreviation: 'VA',
+      label: 'Virginia',
+      value: 'VA',
     },
     {
-      name: 'Washington',
-      abbreviation: 'WA',
+      label: 'Washington',
+      value: 'WA',
     },
     {
-      name: 'West Virginia',
-      abbreviation: 'WV',
+      label: 'West Virginia',
+      value: 'WV',
     },
     {
-      name: 'Wisconsin',
-      abbreviation: 'WI',
+      label: 'Wisconsin',
+      value: 'WI',
     },
     {
-      name: 'Wyoming',
-      abbreviation: 'WY',
+      label: 'Wyoming',
+      value: 'WY',
     },
   ]
 
   const department = [
-    'Sales',
-    'Marketing',
-    'Engineering',
-    'Human Resources',
-    'Legal',
+    // 'Sales',
+    // 'Marketing',
+    // 'Engineering',
+    // 'Human Resources',
+    // 'Legal',
+    { value: 'sales', label: 'Sales' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'engineering', label: 'Engineering' },
+    { value: 'human resources', label: 'Human Resources' },
+    { value: 'legal', label: 'Legal' },
   ]
 
   return (
@@ -263,47 +342,90 @@ export default function CreateEmployee() {
 
         <h2>Create Employee</h2>
 
-        <form>
-          <label>First Name</label>
-          <input />
+        <form onSubmit={handleForm}>
+          <label htmlFor="employee-firstname">First Name</label>
+          <input
+            id="employee-firstname"
+            value={employee.first_name}
+            className="input-firstName"
+            onChange={handleInputs}
+          />
 
-          <label>Last Name</label>
-          <input />
+          <label htmlFor="employee-lastname">Last Name</label>
+          <input
+            id="employee-lastname"
+            value={employee.last_name}
+            className="input-lastName"
+            onChange={handleInputs}
+          />
 
-          <label>Date of Birth</label>
-          <input />
+          <label htmlFor="employee-birthdate">Date of Birth</label>
+          {/* <input /> */}
+          <Datepicker
+            id="employee-birthdate"
+            className="input-birthdate"
+            value={employee.date_of_birth}
+            selected={birthdate}
+            onChange={(date) => setBirthdate(date)}
+          />
 
-          <label>Start Date</label>
-          <input />
+          <label htmlFor="employee-startdate">Start Date</label>
+          <Datepicker
+            id="employee-startdate"
+            value={employee.start_date}
+            className="input-startDate"
+            // onChange={handleInputs}
+            selected={startdate}
+            onChange={(date) => setStartdate(date)}
+          />
 
           <fieldset>
             <legend>Address</legend>
 
-            <label>Street</label>
-            <input />
+            <label htmlFor="employee-street">Street</label>
+            <input
+              id="employee-street"
+              value={employee.street}
+              className="input-street"
+              onChange={handleInputs}
+            />
 
-            <label>City</label>
-            <input />
+            <label htmlFor="employee-city">City</label>
+            <input
+              id="employee-city"
+              value={employee.city}
+              className="input-city"
+              onChange={handleInputs}
+            />
 
             <label>State</label>
             <Dropdown
-              selected={selectedStates}
-              setSelected={setSelectedStates}
               data={states}
+              defaultValue={states[0]}
+              value={employee.state}
+              // onChange={handleChangeState}
+              className="input-state"
             />
 
-            <label>Zip Code</label>
-            <input type="number" />
+            <label htmlFor="employee-zipcode">Zip Code</label>
+            <input
+              id="employee-zipcode"
+              type="number"
+              value={employee.zip_code}
+              className="input-zipCode"
+              onChange={handleInputs}
+            />
           </fieldset>
 
           <label>Department</label>
           <Dropdown
-            selected={selectedDepartement}
-            setSelected={setSelectedDepartement}
             data={department}
+            defaultValue={department[0]}
+            value={employee.department}
+            className="input-department"
           />
 
-          <button>Save</button>
+          <button className="btn-primary">Save</button>
         </form>
       </div>
     </div>

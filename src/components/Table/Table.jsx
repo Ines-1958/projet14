@@ -10,10 +10,18 @@ import Mocked_data from './../Mocked_data.json'
 import { COLUMNS } from './columns'
 import { GlobalFilter } from './GlobalFilter'
 import './Table.scss'
+//
+import { useDispatch, useSelector } from 'react-redux'
 
 export const Table = () => {
+  const employees = useSelector((state) => state.employees.employees)
+
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => Mocked_data, [])
+  // const data = useMemo(() => Mocked_data, [])
+  const data = useMemo(() => employees, [])
+  // const data = useMemo(() => employees, [employees])
+  console.log(data)
+  console.log(data.length)
 
   const tableInstance = useTable(
     {
@@ -38,6 +46,8 @@ export const Table = () => {
     canPreviousPage,
     pageOptions,
     setPageSize,
+    pageCount,
+    gotoPage,
     prepareRow,
     state,
     setGlobalFilter,
@@ -75,8 +85,8 @@ export const Table = () => {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? '🔽' : '🔼') : ''}
+                  <span className="sort-icon">
+                    {column.isSorted ? (column.isSortedDesc ? '▼' : '▲') : ''}
                   </span>
                 </th>
               ))}
@@ -102,18 +112,62 @@ export const Table = () => {
         <span>
           Showing{' '}
           <span>
-            {pageIndex + 1} of {pageOptions.length}
+            {/* {pageIndex + 1} to {pageOptions.length} of {} */}
+            {/* {page.length} to {pageSize} of {data.length} */}
+            {pageIndex * pageSize + 1} to{' '}
+            {pageIndex * pageSize + pageSize >= rows.length
+              ? rows.length
+              : pageIndex * pageSize + pageSize}{' '}
+            of {rows.length}
           </span>{' '}
           entries
         </span>
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} to {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(pageNumber)
+            }}
+            style={{ width: '50px' }}
+          />
+        </span>{' '}
         <div className="pagination-btn">
-          <Link onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            {'<<'}
+          </button>
+          <button
+            className="button-paginate previous"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
             Previous
-          </Link>
-          <button>{pageIndex + 1}</button>
-          <Link onClick={() => nextPage()} disabled={!canNextPage}>
+          </button>
+
+          {/* <button>{pageIndex + 1}</button> */}
+          {/* <button>{pageSize}</button> */}
+
+          <button
+            className="button-paginate next"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
             Next
-          </Link>
+          </button>
+          <button
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {'>>'}
+          </button>
         </div>
       </div>
     </>

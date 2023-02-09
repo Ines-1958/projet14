@@ -7,13 +7,35 @@ h1 {
   align-items: center;
   justify-content: center;
 
+  a {
+    margin: 1.2rem 0;
+  }
+
   form {
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
+
+    input {
+      width: 143px;
+      padding: 0.3rem;
+      // background-color: #edeeef;
+      // border: 2px solid #edeeef;
+    }
+
+    label {
+      margin: 1rem 0 0.5rem;
+    }
 
     fieldset {
       display: flex;
       flex-direction: column;
+      padding: 20px 10px;
+      margin-top: 1rem;
     }
   }
+}
+
+.states {
+  color: red;
 }

@@ -1,0 +1,53 @@
+@import '../../variables/variables.scss';
+
+.date-container {
+  select {
+    font-weight: 600;
+  }
+  select,
+  button {
+    border: none;
+    background: none;
+  }
+
+  button {
+    &.arrow {
+      font-size: 30px;
+    }
+  }
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+.react-datepicker__day-names {
+  background-color: $color-secondary;
+}
+.react-datepicker__day {
+  &:hover {
+    background-color: $color-primary;
+  }
+  &--keyboard-selected,
+  &--selected {
+    background-color: $intermediate-green;
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &-names {
+    font-weight: 600;
+  }
+}
+
+.react-datepicker__header__dropdown,
+.react-datepicker__header__dropdown--select {
+  padding: 0.5rem 0;
+}
+
+.react-datepicker__today-button {
+  background-color: $color-secondary;
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  padding-left: 0.5rem;
+}
