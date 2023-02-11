@@ -7,24 +7,52 @@ import Datepicker from '../../components/Datepicker/Datepicker'
 import employeeReducer from '../../redux/reducers/employeeReducer'
 import Dropdown from '../../components/Dropdown/Dropdown'
 
+import format from 'date-fns/format'
+import Modal from '../../components/Modal/Modal'
+
 export default function CreateEmployee() {
   const [selectedStates, setSelectedStates] = useState('Alabama')
   const [selectedDepartement, setSelectedDepartement] = useState('Sales')
   const [birthdate, setBirthdate] = useState(null)
   const [startdate, setStartdate] = useState(null)
+  const [selectedOption, setSelectedOption] = useState('')
+  const [modal, setModal] = useState(false)
+
+  const toggleModal = (e) => {
+    setModal(!modal)
+    console.log('heeelllooo')
+    // console.log(e)
+  }
   // const [state, setState] = useState('US')
+  const test = (date) => {
+    setStartdate(date)
+    setEmployee((employee) => ({
+      ...employee,
+      start_date: format(date, 'MM-dd-yyyy'),
+    }))
+  }
+  const test1 = (date) => {
+    setBirthdate(date)
+    setEmployee((employee) => ({
+      ...employee,
+      date_of_birth: format(date, 'MM-dd-yyyy'),
+    }))
+  }
 
   //REDUX
   const [employee, setEmployee] = useState({
     first_name: '',
     last_name: '',
     start_date: '',
-    department: '',
+    department: selectedDepartement,
     date_of_birth: '',
+    // date_of_birth: birthdate.toLocaleDateString('en-US'),
+    // date_of_birth: format(birthdate, 'MM-dd-yyyy'),
+    // date_of_birth: Moment(birthdate.date_of_birth).format('YYYY/MM/DD'),
     street: '',
     city: '',
     // state: state.value,
-    state: '',
+    state: selectedStates,
     zip_code: '',
   })
 
@@ -73,10 +101,10 @@ export default function CreateEmployee() {
       const newObjState = { ...employee, zip_code: e.target.value }
       setEmployee(newObjState)
     } else if (e.target.classList.contains('input-state')) {
-      const newObjState = { ...employee, state: e.target.value }
+      const newObjState = { ...employee, state: e.value }
       setEmployee(newObjState)
     } else if (e.target.classList.contains('input-department')) {
-      const newObjState = { ...employee, department: e.target.value }
+      const newObjState = { ...employee, department: e.value }
       setEmployee(newObjState)
     }
   }
@@ -321,16 +349,11 @@ export default function CreateEmployee() {
   ]
 
   const department = [
-    // 'Sales',
-    // 'Marketing',
-    // 'Engineering',
-    // 'Human Resources',
-    // 'Legal',
-    { value: 'sales', label: 'Sales' },
-    { value: 'marketing', label: 'Marketing' },
-    { value: 'engineering', label: 'Engineering' },
-    { value: 'human resources', label: 'Human Resources' },
-    { value: 'legal', label: 'Legal' },
+    { value: 'Sales', label: 'Sales' },
+    { value: 'Marketing', label: 'Marketing' },
+    { value: 'Mngineering', label: 'Engineering' },
+    { value: 'Human Resources', label: 'Human Resources' },
+    { value: 'Legal', label: 'Legal' },
   ]
 
   return (
@@ -364,19 +387,24 @@ export default function CreateEmployee() {
           <Datepicker
             id="employee-birthdate"
             className="input-birthdate"
-            value={employee.date_of_birth}
+            value={birthdate}
             selected={birthdate}
-            onChange={(date) => setBirthdate(date)}
+            // onChange={(date) => setBirthdate(date)}
+            onChange={test1}
           />
 
           <label htmlFor="employee-startdate">Start Date</label>
           <Datepicker
             id="employee-startdate"
-            value={employee.start_date}
+            value={startdate}
             className="input-startDate"
             // onChange={handleInputs}
             selected={startdate}
-            onChange={(date) => setStartdate(date)}
+            onChange={
+              test
+              // (date) => setStartdate(date)
+              // (e) => console.log(e)
+            }
           />
 
           <fieldset>
@@ -402,9 +430,22 @@ export default function CreateEmployee() {
             <Dropdown
               data={states}
               defaultValue={states[0]}
-              value={employee.state}
+              value={states.value}
               // onChange={handleChangeState}
               className="input-state"
+              // onChange={(selectedOption) => {
+              //   setSelectedStates(selectedOption.value)
+              //   console.log(selectedOption.value)
+              //   console.log(setSelectedStates(selectedOption.value))
+              // }}
+              onChange={(selectedOption) => {
+                const selectedValue = selectedOption.value
+
+                setEmployee({
+                  ...employee,
+                  state: selectedValue,
+                })
+              }}
             />
 
             <label htmlFor="employee-zipcode">Zip Code</label>
@@ -423,10 +464,28 @@ export default function CreateEmployee() {
             defaultValue={department[0]}
             value={employee.department}
             className="input-department"
+            // onChange={(e) => console.log(e)}
+            department={department.value}
+            // onChange={(selectedOption) => {
+            //   setSelectedDepartement(selectedOption.value)
+            //   console.log(selectedOption.value)
+            //   console.log(setSelectedDepartement(selectedOption.value))
+            // }}
+            onChange={(selectedOption) => {
+              const selectedValue = selectedOption.value
+
+              setEmployee({
+                ...employee,
+                department: selectedValue,
+              })
+            }}
           />
 
-          <button className="btn-primary">Save</button>
+          <button className="btn-primary" onClick={toggleModal} type="submit">
+            Save
+          </button>
         </form>
+        <Modal />
       </div>
     </div>
   )

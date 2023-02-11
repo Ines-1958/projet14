@@ -1,17 +1,28 @@
-const initialState = {
-  employees: [],
-}
+const storedState = localStorage.getItem('state')
+const initialState = storedState
+  ? JSON.parse(storedState)
+  : {
+      employees: [],
+    }
+// const initialState = {
+//   employees: [],
+// }
 
 function employeeReducer(state = initialState, action) {
   switch (action.type) {
     case 'CREATEEMPLOYEE':
       const newArr = [...state.employees]
       newArr.push(action.payload)
-      return {
+      const newState = {
+        ...state,
         employees: newArr,
       }
-  }
+      localStorage.setItem('state', JSON.stringify(newState))
+      return newState
 
+    default:
+      return state
+  }
   return state
 }
 

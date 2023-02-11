@@ -34,13 +34,15 @@ export default function Datepicker(props) {
     <DatePicker
       // selected={date}
       selected={props.selected}
-      // onChange={(date) => setDate(date)}
+      // onChange={(e) => console.log(e)}
       onChange={props.onChange}
       showMonthDropdown
       showYearDropdown
       dropdownMode="select"
       useWeekdaysShort={true}
       todayButton="🏛️ Today"
+      // dateFormat="MM/dd/yyyy"
+      value={props.value}
 
       //   renderCustomHeader={({
       //     date,

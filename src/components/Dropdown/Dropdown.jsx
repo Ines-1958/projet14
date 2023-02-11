@@ -11,7 +11,13 @@ import '../Dropdown/Dropdown.scss'
 export default function Dropdown(props) {
   return (
     <>
-      <Select options={props.data} defaultValue={props.defaultValue} />
+      <Select
+        options={props.data}
+        defaultValue={props.defaultValue}
+        // onChange={(e) => console.log(e.value)}
+        onChange={props.onChange}
+        // value={props.value}
+      />
     </>
   )
 }

@@ -32,6 +32,12 @@ table {
     // &:nth-child(odd) {
     //   background: #ddd;
     // }
+    // &:not(:first-child):nth-child(odd) {
+    //   background-color: red;
+    // }
+    // &:not(> th) :nth-child(odd) {
+    //   background-color: red;
+    // }
   }
 }
 
