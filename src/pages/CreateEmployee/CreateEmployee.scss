@@ -1,5 +1,11 @@
+@import '../../variables/variables.scss';
+
 h1 {
   text-align: center;
+}
+
+h2 {
+  color: #333333;
 }
 .container {
   display: flex;
@@ -17,14 +23,17 @@ h1 {
     margin-top: 1rem;
 
     input {
-      width: 143px;
+      //width: 143px;
+      width: 15rem;
       padding: 0.3rem;
       // background-color: #edeeef;
       // border: 2px solid #edeeef;
+      color: $input-color;
     }
 
     label {
       margin: 1rem 0 0.5rem;
+      color: #787878;
     }
 
     fieldset {
@@ -32,10 +41,35 @@ h1 {
       flex-direction: column;
       padding: 20px 10px;
       margin-top: 1rem;
+      //
+      border: none;
+
+      &:last-child {
+        border-left: 2px solid $color-primary;
+        padding-left: 2rem;
+      }
+
+      legend {
+        color: #3f3b3c;
+      }
+    }
+
+    button.submit-form {
+      margin: 1.5rem 8rem 0;
     }
   }
 }
 
-.states {
-  color: red;
+.form-content {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.department-content {
+  padding: 20px 8px;
+  > div {
+    margin-top: 0.5rem;
+    width: 15rem;
+  }
 }

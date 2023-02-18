@@ -1,3 +1,4 @@
+@import '../../variables/variables.scss';
 .css-b62m3t-container {
   width: 15rem;
 }
@@ -6,4 +7,8 @@
   //   div {
   //     background-color: yellow;
   //   }
+}
+
+div.css-1dimb5e-singleValue {
+  color: $input-color;
 }

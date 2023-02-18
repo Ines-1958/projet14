@@ -14,8 +14,33 @@
     //   text-decoration: none;
     // }
     .button-paginate {
+      // border: none;
+      // background: none;
+    }
+
+    .first-page,
+    .last-page {
+      font-size: 18px;
       border: none;
       background: none;
+    }
+
+    .first-page {
+      margin-right: 5px;
+
+      &:hover::before {
+        content: 'Go to the first page';
+        font-size: 12px;
+      }
+    }
+
+    .last-page {
+      margin-left: 5px;
+
+      &:hover::after {
+        content: 'Go to the last page';
+        font-size: 12px;
+      }
     }
   }
 }
@@ -28,6 +53,10 @@ table {
   tr {
     &:nth-child(even) {
       background-color: #93ad18;
+    }
+
+    td {
+      font-size: 15px;
     }
     // &:nth-child(odd) {
     //   background: #ddd;

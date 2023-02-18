@@ -17,11 +17,9 @@ export const Table = () => {
   const employees = useSelector((state) => state.employees.employees)
 
   const columns = useMemo(() => COLUMNS, [])
-  // const data = useMemo(() => Mocked_data, [])
+
+  /**Les data sont celles récupérées directement via useSelector, en passant par le state */
   const data = useMemo(() => employees, [])
-  // const data = useMemo(() => employees, [employees])
-  console.log(data)
-  console.log(data.length)
 
   const tableInstance = useTable(
     {
@@ -81,7 +79,7 @@ export const Table = () => {
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps}>
+            <tr {...headerGroup.getHeaderGroupProps} key={headerGroup}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
@@ -98,7 +96,7 @@ export const Table = () => {
           {page.map((row) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={row} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 })}
@@ -141,22 +139,23 @@ export const Table = () => {
           />
         </span>{' '}
         <div className="pagination-btn">
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <button
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+            className="first-page"
+          >
             {'<<'}
           </button>
           <button
-            className="button-paginate previous"
+            className="button-paginate previous btn-secondary"
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
           >
             Previous
           </button>
 
-          {/* <button>{pageIndex + 1}</button> */}
-          {/* <button>{pageSize}</button> */}
-
           <button
-            className="button-paginate next"
+            className="button-paginate next btn-secondary"
             onClick={() => nextPage()}
             disabled={!canNextPage}
           >
@@ -165,6 +164,7 @@ export const Table = () => {
           <button
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
+            className="last-page"
           >
             {'>>'}
           </button>

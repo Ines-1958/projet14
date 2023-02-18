@@ -1,37 +1,31 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './CreateEmployee.scss'
-import CustomDropdown from '../../components/CustomDropdown/CustomDropdown'
 import Datepicker from '../../components/Datepicker/Datepicker'
-import employeeReducer from '../../redux/reducers/employeeReducer'
 import Dropdown from '../../components/Dropdown/Dropdown'
 
 import format from 'date-fns/format'
-import Modal from '../../components/Modal/Modal'
+import { Modal } from 'projet-14hrnet-plugin-modal'
+import 'projet-14hrnet-plugin-modal/dist/Modal.scss'
 
 export default function CreateEmployee() {
-  const [selectedStates, setSelectedStates] = useState('Alabama')
-  const [selectedDepartement, setSelectedDepartement] = useState('Sales')
   const [birthdate, setBirthdate] = useState(null)
   const [startdate, setStartdate] = useState(null)
-  const [selectedOption, setSelectedOption] = useState('')
   const [modal, setModal] = useState(false)
 
-  const toggleModal = (e) => {
+  const toggleModal = () => {
     setModal(!modal)
-    console.log('heeelllooo')
-    // console.log(e)
   }
-  // const [state, setState] = useState('US')
-  const test = (date) => {
+
+  const handleSelectedOption = (date) => {
     setStartdate(date)
     setEmployee((employee) => ({
       ...employee,
       start_date: format(date, 'MM-dd-yyyy'),
     }))
   }
-  const test1 = (date) => {
+  const handleSelectedDate = (date) => {
     setBirthdate(date)
     setEmployee((employee) => ({
       ...employee,
@@ -44,21 +38,13 @@ export default function CreateEmployee() {
     first_name: '',
     last_name: '',
     start_date: '',
-    department: selectedDepartement,
+    department: '',
     date_of_birth: '',
-    // date_of_birth: birthdate.toLocaleDateString('en-US'),
-    // date_of_birth: format(birthdate, 'MM-dd-yyyy'),
-    // date_of_birth: Moment(birthdate.date_of_birth).format('YYYY/MM/DD'),
     street: '',
     city: '',
-    // state: state.value,
-    state: selectedStates,
+    state: '',
     zip_code: '',
   })
-
-  // const handleChangeState = (selectedOption) => {
-  //   setState(selectedOption)
-  // }
 
   const dispatch = useDispatch()
 
@@ -366,126 +352,121 @@ export default function CreateEmployee() {
         <h2>Create Employee</h2>
 
         <form onSubmit={handleForm}>
-          <label htmlFor="employee-firstname">First Name</label>
-          <input
-            id="employee-firstname"
-            value={employee.first_name}
-            className="input-firstName"
-            onChange={handleInputs}
-          />
+          <div className="form-content">
+            <fieldset>
+              <legend>Identity and start date</legend>
+              <label htmlFor="employee-firstname">First Name</label>
+              <input
+                id="employee-firstname"
+                value={employee.first_name}
+                className="input-firstName"
+                onChange={handleInputs}
+              />
 
-          <label htmlFor="employee-lastname">Last Name</label>
-          <input
-            id="employee-lastname"
-            value={employee.last_name}
-            className="input-lastName"
-            onChange={handleInputs}
-          />
+              <label htmlFor="employee-lastname">Last Name</label>
+              <input
+                id="employee-lastname"
+                value={employee.last_name}
+                className="input-lastName"
+                onChange={handleInputs}
+              />
 
-          <label htmlFor="employee-birthdate">Date of Birth</label>
-          {/* <input /> */}
-          <Datepicker
-            id="employee-birthdate"
-            className="input-birthdate"
-            value={birthdate}
-            selected={birthdate}
-            // onChange={(date) => setBirthdate(date)}
-            onChange={test1}
-          />
+              <label htmlFor="employee-birthdate">Date of Birth</label>
+              <Datepicker
+                id="employee-birthdate"
+                className="input-birthdate"
+                value={birthdate}
+                selected={birthdate}
+                onChange={handleSelectedDate}
+              />
 
-          <label htmlFor="employee-startdate">Start Date</label>
-          <Datepicker
-            id="employee-startdate"
-            value={startdate}
-            className="input-startDate"
-            // onChange={handleInputs}
-            selected={startdate}
-            onChange={
-              test
-              // (date) => setStartdate(date)
-              // (e) => console.log(e)
-            }
-          />
+              <label htmlFor="employee-startdate">Start Date</label>
+              <Datepicker
+                id="employee-startdate"
+                value={startdate}
+                className="input-startDate"
+                selected={startdate}
+                onChange={handleSelectedOption}
+              />
+            </fieldset>
 
-          <fieldset>
-            <legend>Address</legend>
+            <fieldset>
+              <legend>Address</legend>
 
-            <label htmlFor="employee-street">Street</label>
-            <input
-              id="employee-street"
-              value={employee.street}
-              className="input-street"
-              onChange={handleInputs}
-            />
+              <label htmlFor="employee-street">Street</label>
+              <input
+                id="employee-street"
+                value={employee.street}
+                className="input-street"
+                onChange={handleInputs}
+              />
 
-            <label htmlFor="employee-city">City</label>
-            <input
-              id="employee-city"
-              value={employee.city}
-              className="input-city"
-              onChange={handleInputs}
-            />
+              <label htmlFor="employee-city">City</label>
+              <input
+                id="employee-city"
+                value={employee.city}
+                className="input-city"
+                onChange={handleInputs}
+              />
 
-            <label>State</label>
+              <label>State</label>
+              <Dropdown
+                data={states}
+                defaultValue={states[0]}
+                value={states.value}
+                className="input-state"
+                onChange={(selectedOption) => {
+                  const selectedValue = selectedOption.value
+
+                  setEmployee({
+                    ...employee,
+                    state: selectedValue,
+                  })
+                }}
+              />
+
+              <label htmlFor="employee-zipcode">Zip Code</label>
+              <input
+                id="employee-zipcode"
+                type="number"
+                value={employee.zip_code}
+                className="input-zipCode"
+                onChange={handleInputs}
+              />
+            </fieldset>
+          </div>
+          <div className="department-content">
+            <label>Department</label>
             <Dropdown
-              data={states}
-              defaultValue={states[0]}
-              value={states.value}
-              // onChange={handleChangeState}
-              className="input-state"
-              // onChange={(selectedOption) => {
-              //   setSelectedStates(selectedOption.value)
-              //   console.log(selectedOption.value)
-              //   console.log(setSelectedStates(selectedOption.value))
-              // }}
+              data={department}
+              defaultValue={department[0]}
+              value={employee.department}
+              className="input-department"
+              department={department.value}
               onChange={(selectedOption) => {
                 const selectedValue = selectedOption.value
 
                 setEmployee({
                   ...employee,
-                  state: selectedValue,
+                  department: selectedValue,
                 })
               }}
             />
-
-            <label htmlFor="employee-zipcode">Zip Code</label>
-            <input
-              id="employee-zipcode"
-              type="number"
-              value={employee.zip_code}
-              className="input-zipCode"
-              onChange={handleInputs}
-            />
-          </fieldset>
-
-          <label>Department</label>
-          <Dropdown
-            data={department}
-            defaultValue={department[0]}
-            value={employee.department}
-            className="input-department"
-            // onChange={(e) => console.log(e)}
-            department={department.value}
-            // onChange={(selectedOption) => {
-            //   setSelectedDepartement(selectedOption.value)
-            //   console.log(selectedOption.value)
-            //   console.log(setSelectedDepartement(selectedOption.value))
-            // }}
-            onChange={(selectedOption) => {
-              const selectedValue = selectedOption.value
-
-              setEmployee({
-                ...employee,
-                department: selectedValue,
-              })
-            }}
-          />
-
-          <button className="btn-primary" onClick={toggleModal} type="submit">
+          </div>
+          <button
+            className="btn-primary submit-form"
+            onClick={toggleModal}
+            type="submit"
+          >
             Save
           </button>
         </form>
-        <Modal />
+        <Modal
+          modal={modal}
+          setModal={setModal}
+          title={'Employee Created!'}
+          message={'The employee has been added to the database.'}
+        />
       </div>
     </div>
   )

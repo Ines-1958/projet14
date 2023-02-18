@@ -4,9 +4,6 @@ const initialState = storedState
   : {
       employees: [],
     }
-// const initialState = {
-//   employees: [],
-// }
 
 function employeeReducer(state = initialState, action) {
   switch (action.type) {
