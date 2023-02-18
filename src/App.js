@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
 
-      <Routes>
+      <Routes basename={process.env.PUBLIC_URL}>
         <Route path="/" element={<CreateEmployee />} />
         <Route path="/employees" element={<EmployeeList />} />
       </Routes>
