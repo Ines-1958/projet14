@@ -23,17 +23,15 @@ h2 {
     margin-top: 1rem;
 
     input {
-      //width: 143px;
       width: 15rem;
       padding: 0.3rem;
-      // background-color: #edeeef;
-      // border: 2px solid #edeeef;
       color: $input-color;
     }
 
     label {
       margin: 1rem 0 0.5rem;
       color: #787878;
+      font-size: 15px;
     }
 
     fieldset {
@@ -41,16 +39,16 @@ h2 {
       flex-direction: column;
       padding: 20px 10px;
       margin-top: 1rem;
-      //
       border: none;
 
-      &:last-child {
+      &:nth-child(2) {
         border-left: 2px solid $color-primary;
         padding-left: 2rem;
       }
 
       legend {
         color: #3f3b3c;
+        margin-bottom: -1rem;
       }
     }
 
@@ -67,7 +65,6 @@ h2 {
 }
 
 .department-content {
-  padding: 20px 8px;
   > div {
     margin-top: 0.5rem;
     width: 15rem;

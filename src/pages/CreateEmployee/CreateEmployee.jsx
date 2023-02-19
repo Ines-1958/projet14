@@ -436,22 +436,25 @@ export default function CreateEmployee() {
             </fieldset>
           </div>
           <div className="department-content">
-            <label>Department</label>
-            <Dropdown
-              data={department}
-              defaultValue={department[0]}
-              value={employee.department}
-              className="input-department"
-              department={department.value}
-              onChange={(selectedOption) => {
-                const selectedValue = selectedOption.value
+            <fieldset>
+              <legend>Department</legend>
+              <label>Department</label>
+              <Dropdown
+                data={department}
+                defaultValue={department[0]}
+                value={employee.department}
+                className="input-department"
+                department={department.value}
+                onChange={(selectedOption) => {
+                  const selectedValue = selectedOption.value
 
-                setEmployee({
-                  ...employee,
-                  department: selectedValue,
-                })
-              }}
-            />
+                  setEmployee({
+                    ...employee,
+                    department: selectedValue,
+                  })
+                }}
+              />
+            </fieldset>
           </div>
           <button
             className="btn-primary submit-form"
