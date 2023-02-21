@@ -389,7 +389,6 @@ export default function CreateEmployee() {
                 onChange={handleSelectedOption}
               />
             </fieldset>
-
             <fieldset>
               <legend>Address</legend>
 

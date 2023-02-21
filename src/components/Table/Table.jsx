@@ -1,21 +1,17 @@
 import React, { useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import {
   useTable,
   useGlobalFilter,
   useSortBy,
   usePagination,
 } from 'react-table'
-import Mocked_data from './../Mocked_data.json'
 import { COLUMNS } from './columns'
 import { GlobalFilter } from './GlobalFilter'
 import './Table.scss'
-//
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export const Table = () => {
   const employees = useSelector((state) => state.employees.employees)
-
   const columns = useMemo(() => COLUMNS, [])
 
   /**Les data sont celles récupérées directement via useSelector, en passant par le state */
@@ -51,9 +47,7 @@ export const Table = () => {
     setGlobalFilter,
   } = tableInstance
 
-  const { globalFilter } = state
-
-  const { pageIndex, pageSize } = state
+  const { globalFilter, pageIndex, pageSize } = state
 
   return (
     <>
@@ -110,8 +104,6 @@ export const Table = () => {
         <span>
           Showing{' '}
           <span>
-            {/* {pageIndex + 1} to {pageOptions.length} of {} */}
-            {/* {page.length} to {pageSize} of {data.length} */}
             {pageIndex * pageSize + 1} to{' '}
             {pageIndex * pageSize + pageSize >= rows.length
               ? rows.length

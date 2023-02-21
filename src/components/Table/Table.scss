@@ -50,7 +50,8 @@ table {
 
   tr {
     &:nth-child(even) {
-      background-color: $intermediate-green;
+      //background-color: $intermediate-green;
+      background-color: #97b71f;
     }
 
     &:hover {
@@ -59,7 +60,8 @@ table {
 
     td {
       font-size: 15px;
-      color: #3f3b3c;
+      //color: #3f3b3c;
+      color: #1f1f1f;
     }
   }
 
@@ -73,7 +75,8 @@ table {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: $color-secondary;
+    //background-color: $color-secondary;
+    background-color: #86a80a;
     color: $black;
   }
 }

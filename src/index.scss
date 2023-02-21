@@ -19,7 +19,7 @@ body {
 
 .btn-primary {
   background-image: none;
-  background-color: $intermediate-green;
+  background-color: $color-secondary;
   color: $white;
   padding: 0.7em 2em;
   border-radius: 50px;
@@ -38,7 +38,8 @@ body {
 
 .btn-secondary {
   background-image: none;
-  background-color: $intermediate-green;
+  //background-color: $intermediate-green;
+  background-color: #87a31a;
   color: $black;
   padding: 0.2em 2em;
   border-radius: 6px;

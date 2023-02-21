@@ -18,7 +18,6 @@ export default function Header() {
         >
           Create Employee
         </NavLink>
-
         <NavLink
           to="/employees"
           style={({ isActive }) =>
