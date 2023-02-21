@@ -119,7 +119,7 @@ export const Table = () => {
           </strong>{' '}
         </span>
         <span>
-          | Go to page:{' '}
+          <label htmlFor="search-page">| Go to page: </label>
           <input
             type="number"
             defaultValue={pageIndex + 1}
@@ -128,6 +128,7 @@ export const Table = () => {
               gotoPage(pageNumber)
             }}
             style={{ width: '50px' }}
+            id="search-page"
           />
         </span>{' '}
         <div className="pagination-btn">

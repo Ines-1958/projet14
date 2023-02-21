@@ -14,6 +14,7 @@ export default function Datepicker(props) {
       useWeekdaysShort={true}
       todayButton="🏛️ Today"
       value={props.value}
+      id={props.id}
     />
   )
 }

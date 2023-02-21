@@ -406,7 +406,7 @@ export default function CreateEmployee() {
                 onChange={handleInputs}
               />
 
-              <label>State</label>
+              <label htmlFor="react-select-2-input">State</label>
               <Dropdown
                 data={states}
                 defaultValue={states[0]}
@@ -435,7 +435,7 @@ export default function CreateEmployee() {
           <div className="department-content">
             <fieldset>
               <legend>Department</legend>
-              <label>Department</label>
+              <label htmlFor="react-select-3-input">Department</label>
               <Dropdown
                 data={department}
                 defaultValue={department[0]}
