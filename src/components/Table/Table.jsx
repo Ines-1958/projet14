@@ -15,7 +15,7 @@ export const Table = () => {
   const columns = useMemo(() => COLUMNS, [])
 
   /**Les data sont celles récupérées directement via useSelector, en passant par le state */
-  const data = useMemo(() => employees, [])
+  const data = useMemo(() => employees, [employees])
 
   const tableInstance = useTable(
     {

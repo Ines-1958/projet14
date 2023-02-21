@@ -14,10 +14,12 @@ export default function CreateEmployee() {
   const [startdate, setStartdate] = useState(null)
   const [modal, setModal] = useState(false)
 
+  /**Fonction qui gère l'ouverture et la fermeture de la modale */
   const toggleModal = () => {
     setModal(!modal)
   }
 
+  /**Fonction qui gère la récupération de la date de la start date */
   const handleSelectedOption = (date) => {
     setStartdate(date)
     setEmployee((employee) => ({
@@ -25,6 +27,8 @@ export default function CreateEmployee() {
       start_date: format(date, 'MM-dd-yyyy'),
     }))
   }
+
+  /**Fonction qui gère la récupération de la date de birthdate */
   const handleSelectedDate = (date) => {
     setBirthdate(date)
     setEmployee((employee) => ({
@@ -85,12 +89,6 @@ export default function CreateEmployee() {
       setEmployee(newObjState)
     } else if (e.target.classList.contains('input-zipCode')) {
       const newObjState = { ...employee, zip_code: e.target.value }
-      setEmployee(newObjState)
-    } else if (e.target.classList.contains('input-state')) {
-      const newObjState = { ...employee, state: e.value }
-      setEmployee(newObjState)
-    } else if (e.target.classList.contains('input-department')) {
-      const newObjState = { ...employee, department: e.value }
       setEmployee(newObjState)
     }
   }
@@ -337,7 +335,7 @@ export default function CreateEmployee() {
   const department = [
     { value: 'Sales', label: 'Sales' },
     { value: 'Marketing', label: 'Marketing' },
-    { value: 'Mngineering', label: 'Engineering' },
+    { value: 'Engineering', label: 'Engineering' },
     { value: 'Human Resources', label: 'Human Resources' },
     { value: 'Legal', label: 'Legal' },
   ]
